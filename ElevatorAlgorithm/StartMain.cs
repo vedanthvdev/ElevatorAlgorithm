@@ -1,6 +1,4 @@
 ﻿using System;
-using System.ComponentModel.Design;
-using System.Threading;
 using System.IO;
 using System.Collections.Generic;
 using System.Linq;
