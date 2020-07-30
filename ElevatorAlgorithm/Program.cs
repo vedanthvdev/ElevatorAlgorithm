@@ -221,7 +221,7 @@ class Program
 										change = elevator[k];
 										z = k + 1;
 										elevator[k].setIsIdle(1);
-										Console.WriteLine("Elevator " + z + " is selected and idle is set to " + elevator[k].getIsIdle());
+										Console.WriteLine("\nElevator " + z + " is selected\n");
 										goto LoopEnd;
 
 									}
@@ -317,7 +317,7 @@ class Program
 						{
 							elevator[k] = change;
 							elevator[k].setIsIdle(-1);
-							Console.WriteLine("Elevator " + z + " has ended its action and idle is set to " + elevator[k].getIsIdle());
+							Console.WriteLine("\nElevator " + z + " has ended its action and is idle now \n");
 							break;
 						}
 
