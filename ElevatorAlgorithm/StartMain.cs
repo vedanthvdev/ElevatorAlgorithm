@@ -26,7 +26,7 @@ class StartMain
 				termsList.Add(Int32.Parse(entries[1]));
 
             }
-
+			
 			//numOfElevators = termsList[0];
 			//minFloor = termsList[1];
 			//maxFloor = termsList[2];
@@ -52,8 +52,10 @@ class StartMain
 				//Every  Elevator Status
 				for (int j = 0; j < elevator.Length; j++)
 				{
+					Console.ForegroundColor = ConsoleColor.Cyan;
 					Console.Out.WriteLine("\nElevator " + (j + 1) + " is at Floor----> " + elevator[j].getCurrentFloor()
 							+ "\t Number of people on it.....>" + elevator[j].getSum());
+					Console.ForegroundColor = ConsoleColor.White;
 				}
 
 				Console.Out.WriteLine("----------------++++++++-----------------");
@@ -80,7 +82,9 @@ class StartMain
 
 						if (floor[i] < elevator[1].getMinFloor() || floor[i] > elevator[1].getMaxFloor())
 						{
-							Console.Out.WriteLine("Enter valid floor");
+							Console.ForegroundColor = ConsoleColor.DarkRed;						//Color Coding for Error Message
+							Console.Out.WriteLine("FLOOR NUMBER INVALID");
+							Console.ForegroundColor = ConsoleColor.White;
 						}
 						else
 						{
@@ -112,7 +116,9 @@ class StartMain
 										change = elevator[k];									//Selecting the desired elevator into temp 
 										z = k + 1;
 										elevator[k].setIsIdle(1);
+										Console.ForegroundColor = ConsoleColor.Cyan;
 										Console.WriteLine("\nElevator " + z + " is selected\n");
+										Console.ForegroundColor = ConsoleColor.White;
 										goto LoopEnd;
 
 									}
@@ -137,13 +143,17 @@ class StartMain
 						else if (change.getSum() <= 0)
 						{
 							change.setSum(-people[i]);
+							Console.ForegroundColor = ConsoleColor.DarkRed;
 							Console.Out.WriteLine("PLEASE ENTER A POSITIVE INTEGER");
+							Console.ForegroundColor = ConsoleColor.White;
 						}
 						else
 						{
 							change.setSum(-people[i]);
-							Console.Out.WriteLine("SORRY WEIGHT LIMIT OF ELEVATOR " + z + " EXEEDED...\n"
+							Console.ForegroundColor = ConsoleColor.DarkRed;
+							Console.Out.WriteLine("SORRY WEIGHT LIMIT OF ELEVATOR " + z + " EXEEDED...\nOnly "
 									+ (change.getMaxCapacity() - change.getSum()) + " CAN COME ON THIS FLOOR ");
+							Console.ForegroundColor = ConsoleColor.White;
 
 						}
 
@@ -168,7 +178,9 @@ class StartMain
 
 							if (floor[i] < elevator[1].getMinFloor() || floor[i] > elevator[1].getMaxFloor())
 							{
-								Console.Out.WriteLine("Enter valid floor");
+								Console.ForegroundColor = ConsoleColor.DarkRed;
+								Console.Out.WriteLine("FLOOR NUMBER INVALID");
+								Console.ForegroundColor = ConsoleColor.White;
 							}
 							else
 							{
@@ -184,12 +196,16 @@ class StartMain
 							people[i] = Int32.Parse(Console.ReadLine());
 							if (change.getSum() < people[i])
 							{
+								Console.ForegroundColor = ConsoleColor.DarkRed;
 								Console.Out.WriteLine(
 										"Sorry there are only " + change.getSum() + " people left on elevator " + z);
+								Console.ForegroundColor = ConsoleColor.White;
 							}
 							else if (people[i] < 0)
 							{
+								Console.ForegroundColor = ConsoleColor.DarkRed;
 								Console.Out.WriteLine("Please enter a positive integer...");
+								Console.ForegroundColor = ConsoleColor.White;
 							}
 							else
 							{

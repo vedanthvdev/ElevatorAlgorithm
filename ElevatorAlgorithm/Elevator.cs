@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 
 namespace ElevatorAlgorithm
 
@@ -94,8 +95,11 @@ namespace ElevatorAlgorithm
 		{
 
 			currentFloor++;
+			Console.ForegroundColor = ConsoleColor.DarkBlue;
 			Console.Out.WriteLine("Elevator " + z + " moved up one level to : " + currentFloor + " And carrying "
 					+ getPeople() + " people");
+			Console.ForegroundColor = ConsoleColor.White;
+			Thread.Sleep(500);
 
 		}
 
@@ -103,10 +107,11 @@ namespace ElevatorAlgorithm
 		{
 
 			currentFloor--;
+			Console.ForegroundColor = ConsoleColor.DarkGreen;
 			Console.Out.WriteLine("Elevator " + z + " moved down one level to : " + currentFloor + " And carrying "
 					+ getPeople() + " people");
-
-
+			Console.ForegroundColor = ConsoleColor.White;
+			Thread.Sleep(500);
 		}
 
 		public int getIsIdle()
