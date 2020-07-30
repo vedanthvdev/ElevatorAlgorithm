@@ -2,19 +2,20 @@
 using System.IO;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.VisualBasic.CompilerServices;
 
 namespace ElevatorAlgorithm
 {
-	
-class StartMain
+
+    class StartMain
     {
         static void Main(string[] args)
         {
 			//Assigning all default values like minFloor,maxFloor,maxCapacity and number of elevators from a text file
+			//this could be used but have to create the file according to the location
+
 			List<int> termsList = new List<int>();
 
-			String filepath = @"C:\Users\Chint\Desktop\Admin.txt";
+			String filepath = @"../../../Variables.txt";
 			List<string> lines = File.ReadAllLines(filepath).ToList();
 
 			foreach(var line in lines){
@@ -24,17 +25,21 @@ class StartMain
 				termsList.Add(Int32.Parse(entries[1]));
 
             }
-			
+
+			//these variables can be changed according to the user in Variables.txt file
+
 			//numOfElevators = termsList[0];
 			//minFloor = termsList[1];
 			//maxFloor = termsList[2];
 			//maxCapacity = termsList[3];
 
+
 			Elevator[] elevator = new Elevator[termsList[0]];
 
 			// Assigning Lowest Floor
 			//Highest Floor
-			//Maximun Capacity
+			//Maximun Capacity 
+			//to all the elevators present
 			for (int i = 0; i < termsList[0]; i++)
 			{ 
 				elevator[i] = new Elevator(termsList[1], termsList[2], termsList[3]);
@@ -47,7 +52,7 @@ class StartMain
 			while (true)
 			{
 
-				//Every  Elevator Status
+				//Status of all Elevators
 				for (int j = 0; j < elevator.Length; j++)
 				{
 					Console.ForegroundColor = ConsoleColor.Cyan;
@@ -56,11 +61,11 @@ class StartMain
 					Console.ForegroundColor = ConsoleColor.White;
 				}
 
-				Console.Out.WriteLine("----------------++++++++-----------------");
-
-				Console.Out.WriteLine("\nHow many floors are being called ");
+				Console.Out.WriteLine("--------------------------++++++++-------------------------");
 
 				// Checking if the user wants Multiple floors call
+				Console.Out.WriteLine("\nHOW many MULTIPLE FLOORS are people waiting on?");
+								
 				int numFloors = Int32.Parse(Console.ReadLine()); 
 				int[] floor = new int[numFloors];
 				int[] people = new int[numFloors];
@@ -125,7 +130,7 @@ class StartMain
 					}
 					LoopEnd:
 					
-					// Registering the User input of amount of users waiting for on desired floor
+					// Registering the User input of amount of users waiting on that desired floor
 					while (true)
 					{
 						Console.Out.WriteLine("Enter the NUMBER OF PEOPLE waiting at level " + floor[i] + "----->MAXIMUM "
@@ -160,7 +165,7 @@ class StartMain
 					// Moving to the selected floor Step by Step
 					change.moveNext(floor[i], z);
 
-					// Setting the number of people on the elevator and the elevator selected
+					// Assigning the number of people boarding the elevator
 					change.setPeople(people[i], z); 
 
 					//Keeps looping until the people on the elevator is 0

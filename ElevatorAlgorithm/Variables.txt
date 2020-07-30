@@ -1,0 +1,4 @@
+﻿NumOfElevators=4
+minFloor=0
+maxFloor=10
+maxCapacity=5
