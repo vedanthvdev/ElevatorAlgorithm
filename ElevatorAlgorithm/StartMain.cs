@@ -33,6 +33,7 @@ class StartMain
 			maxCapacity = termsList[3];
 			*/
 
+			//these variables can be changed according to the user
 			int numOfElevators = 4;
 			int minFloor = 0;
 			int maxFloor = 10;
