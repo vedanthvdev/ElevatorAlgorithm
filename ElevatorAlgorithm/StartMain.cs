@@ -1,6 +1,10 @@
 ﻿using System;
 using System.ComponentModel.Design;
 using System.Threading;
+using System.IO;
+using System.Collections.Generic;
+using System.Linq;
+using Microsoft.VisualBasic.CompilerServices;
 
 namespace ElevatorAlgorithm
 {
@@ -9,19 +13,33 @@ class StartMain
     {
         static void Main(string[] args)
         {
+			//Assigning all default values like minFloor,maxFloor,maxCapacity and number of elevators from a text file
+			List<int> termsList = new List<int>();
 
-			int numOfElevators = 4; 
-			int minFloor = 0;
-			int maxFloor = 10;
-			int maxCapacity = 5;
-			Elevator[] elevator = new Elevator[numOfElevators];
+			String filepath = @"C:\Users\Chint\Desktop\Admin.txt";
+			List<string> lines = File.ReadAllLines(filepath).ToList();
+
+			foreach(var line in lines){
+
+				string[] entries = line.Split('=');
+                
+				termsList.Add(Int32.Parse(entries[1]));
+
+            }
+
+			//numOfElevators = termsList[0];
+			//minFloor = termsList[1];
+			//maxFloor = termsList[2];
+			//maxCapacity = termsList[3];
+
+			Elevator[] elevator = new Elevator[termsList[0]];
 
 			// Assigning Lowest Floor
 			//Highest Floor
 			//Maximun Capacity
-			for (int i = 0; i < numOfElevators; i++)
+			for (int i = 0; i < termsList[0]; i++)
 			{ 
-				elevator[i] = new Elevator(minFloor, maxFloor, maxCapacity);
+				elevator[i] = new Elevator(termsList[1], termsList[2], termsList[3]);
 
 			}
 
