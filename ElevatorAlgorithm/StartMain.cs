@@ -42,7 +42,8 @@ class StartMain
 
 			// Assigning Lowest Floor
 			//Highest Floor
-			//Maximun Capacity
+			//Maximun Capacity 
+			//to all the elevators present
 			for (int i = 0; i < numOfElevators; i++)
 			{ 
 				elevator[i] = new Elevator(minFloor, maxFloor, maxCapacity);
@@ -55,7 +56,7 @@ class StartMain
 			while (true)
 			{
 
-				//Every  Elevator Status
+				//Status of all Elevators
 				for (int j = 0; j < elevator.Length; j++)
 				{
 					Console.ForegroundColor = ConsoleColor.Cyan;
@@ -64,11 +65,11 @@ class StartMain
 					Console.ForegroundColor = ConsoleColor.White;
 				}
 
-				Console.Out.WriteLine("----------------++++++++-----------------");
-
-				Console.Out.WriteLine("\nHow many floors are being called ");
+				Console.Out.WriteLine("--------------------------++++++++-------------------------");
 
 				// Checking if the user wants Multiple floors call
+				Console.Out.WriteLine("\nHow many floors are being called ");
+								
 				int numFloors = Int32.Parse(Console.ReadLine()); 
 				int[] floor = new int[numFloors];
 				int[] people = new int[numFloors];
@@ -133,7 +134,7 @@ class StartMain
 					}
 					LoopEnd:
 					
-					// Registering the User input of amount of users waiting for on desired floor
+					// Registering the User input of amount of users waiting on that desired floor
 					while (true)
 					{
 						Console.Out.WriteLine("Enter the NUMBER OF PEOPLE waiting at level " + floor[i] + "----->MAXIMUM "
@@ -168,7 +169,7 @@ class StartMain
 					// Moving to the selected floor Step by Step
 					change.moveNext(floor[i], z);
 
-					// Setting the number of people on the elevator and the elevator selected
+					// Assigning the number of people boarding the elevator
 					change.setPeople(people[i], z); 
 
 					//Keeps looping until the people on the elevator is 0
