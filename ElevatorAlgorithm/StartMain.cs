@@ -12,7 +12,9 @@ class StartMain
         static void Main(string[] args)
         {
 			//Assigning all default values like minFloor,maxFloor,maxCapacity and number of elevators from a text file
-			List<int> termsList = new List<int>();
+			//this could be used but have to create the file according to the location
+
+			/*List<int> termsList = new List<int>();
 
 			String filepath = @"C:\Users\Chint\Desktop\Admin.txt";
 			List<string> lines = File.ReadAllLines(filepath).ToList();
@@ -25,19 +27,25 @@ class StartMain
 
             }
 			
-			//numOfElevators = termsList[0];
-			//minFloor = termsList[1];
-			//maxFloor = termsList[2];
-			//maxCapacity = termsList[3];
+			numOfElevators = termsList[0];
+			minFloor = termsList[1];
+			maxFloor = termsList[2];
+			maxCapacity = termsList[3];
+			*/
 
-			Elevator[] elevator = new Elevator[termsList[0]];
+			int numOfElevators = 4;
+			int minFloor = 0;
+			int maxFloor = 10;
+			int maxCapacity = 5;
+
+			Elevator[] elevator = new Elevator[numOfElevators];
 
 			// Assigning Lowest Floor
 			//Highest Floor
 			//Maximun Capacity
-			for (int i = 0; i < termsList[0]; i++)
+			for (int i = 0; i < numOfElevators; i++)
 			{ 
-				elevator[i] = new Elevator(termsList[1], termsList[2], termsList[3]);
+				elevator[i] = new Elevator(minFloor, maxFloor, maxCapacity);
 
 			}
 
