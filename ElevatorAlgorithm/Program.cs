@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.Design;
 
 namespace ElevatorAlgorithm
 {
@@ -15,6 +16,8 @@ namespace ElevatorAlgorithm
 		void moveUp(int z);
 		void moveDown(int z);
 		void moveNext(int floor, int z);
+		int getIsIdle();
+		int setIsIdle(int a);
 
 	}
 
@@ -26,6 +29,7 @@ namespace ElevatorAlgorithm
 	private int currentFloor;
 	private int people;
 	private int sum;
+	private int isIdle;
 
 	
 	public int getSum()
@@ -121,8 +125,17 @@ namespace ElevatorAlgorithm
 
 	}
 
+        public int getIsIdle()
+        {
+            return isIdle;
+        }
 
-}
+        public int setIsIdle(int a)
+        {
+			this.isIdle += a;
+            return isIdle;
+        }
+    }
 
 class Program
     {
@@ -141,7 +154,7 @@ class Program
 
 			}
 
-			Elevator change = null; // Temporary Object
+			Elevator change = null;					// Temporary Object
 
 			while (true)
 			{
@@ -163,7 +176,7 @@ class Program
 
 				int z = 0;
 
-				for (int i = 0; i < numFloors; i++)
+				for (int i = 0; i < numFloors; i++) 
 				{
 
 					// Selecting the floor where people are waiting
@@ -188,7 +201,7 @@ class Program
 					// Choosing the BEST ELEVATOR for that location
 					int[] unsorted = new int[elevator.Length];
 					int[] sorted = new int[elevator.Length];
-
+			
 					for (int j = 0; j < elevator.Length; j++)
 					{
 						unsorted[j] = Math.Abs(floor[i] - elevator[j].getCurrentFloor());
@@ -197,16 +210,26 @@ class Program
 
 					Array.Sort(sorted);
 
-					for (int k = 0; k < elevator.Length; k++)
+					for (int j = 0; j < sorted.Length; j++)
 					{
-						if (sorted[0] == unsorted[k])
-						{
-							change = elevator[k];
-							z = k + 1;
-							break;
-						}
-					}
+							for (int k = 0; k < elevator.Length; k++)
+							{
 
+								{
+									if (elevator[k].getIsIdle() == 0 && sorted[j] == unsorted[k])
+									{
+										change = elevator[k];
+										z = k + 1;
+										elevator[k].setIsIdle(1);
+										Console.WriteLine("Elevator " + z + " is selected and idle is set to " + elevator[k].getIsIdle());
+										goto LoopEnd;
+
+									}
+								}
+							}
+					}
+					LoopEnd:
+					//sfs
 					// Acknowledging the number of people waiting for the elevator on selected floor
 					while (true)
 					{
@@ -287,13 +310,14 @@ class Program
 
 					}
 
-					// forwarding the values from temporary elevator object to desired elevator
-					// object
+					// forwarding the values from temporary elevator object to desired elevator object
 					for (int k = 0; k < elevator.Length; k++)
 					{
 						if (z == k + 1)
 						{
 							elevator[k] = change;
+							elevator[k].setIsIdle(-1);
+							Console.WriteLine("Elevator " + z + " has ended its action and idle is set to " + elevator[k].getIsIdle());
 							break;
 						}
 
