@@ -14,9 +14,9 @@ class StartMain
 			//Assigning all default values like minFloor,maxFloor,maxCapacity and number of elevators from a text file
 			//this could be used but have to create the file according to the location
 
-			/*List<int> termsList = new List<int>();
+			List<int> termsList = new List<int>();
 
-			String filepath = @"C:\Users\Chint\Desktop\Admin.txt";
+			String filepath = @"../../../Variables.txt";
 			List<string> lines = File.ReadAllLines(filepath).ToList();
 
 			foreach(var line in lines){
@@ -26,28 +26,24 @@ class StartMain
 				termsList.Add(Int32.Parse(entries[1]));
 
             }
-			
-			numOfElevators = termsList[0];
-			minFloor = termsList[1];
-			maxFloor = termsList[2];
-			maxCapacity = termsList[3];
-			*/
 
-			//these variables can be changed according to the user
-			int numOfElevators = 4;
-			int minFloor = 0;
-			int maxFloor = 10;
-			int maxCapacity = 5;
+			//these variables can be changed according to the user in Variables.txt file
 
-			Elevator[] elevator = new Elevator[numOfElevators];
+			//numOfElevators = termsList[0];
+			//minFloor = termsList[1];
+			//maxFloor = termsList[2];
+			//maxCapacity = termsList[3];
+
+
+			Elevator[] elevator = new Elevator[termsList[0]];
 
 			// Assigning Lowest Floor
 			//Highest Floor
 			//Maximun Capacity 
 			//to all the elevators present
-			for (int i = 0; i < numOfElevators; i++)
+			for (int i = 0; i < termsList[0]; i++)
 			{ 
-				elevator[i] = new Elevator(minFloor, maxFloor, maxCapacity);
+				elevator[i] = new Elevator(termsList[1], termsList[2], termsList[3]);
 
 			}
 
