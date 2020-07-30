@@ -69,7 +69,7 @@ class StartMain
 				Console.Out.WriteLine("--------------------------++++++++-------------------------");
 
 				// Checking if the user wants Multiple floors call
-				Console.Out.WriteLine("\nHow many floors are being called ");
+				Console.Out.WriteLine("\nHOW many MULTIPLE FLOORS are people waiting on?");
 								
 				int numFloors = Int32.Parse(Console.ReadLine()); 
 				int[] floor = new int[numFloors];
