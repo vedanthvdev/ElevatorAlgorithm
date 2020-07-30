@@ -5,29 +5,33 @@ using System.Threading;
 namespace ElevatorAlgorithm
 {
 	
-class Program
+class StartMain
     {
         static void Main(string[] args)
         {
 
-			int numOfElevators = 4; // Setting Number of Elevators in Building
+			int numOfElevators = 4; 
 			int minFloor = 0;
 			int maxFloor = 10;
 			int maxCapacity = 5;
 			Elevator[] elevator = new Elevator[numOfElevators];
 
+			// Assigning Lowest Floor
+			//Highest Floor
+			//Maximun Capacity
 			for (int i = 0; i < numOfElevators; i++)
-			{ // Assigning MinFloors, MaxFloors and MaxCapacity
+			{ 
 				elevator[i] = new Elevator(minFloor, maxFloor, maxCapacity);
 
 			}
 
-			Elevator change = null;					// Temporary Object
+			//Temporary Elevator Object
+			Elevator change = null;					
 
 			while (true)
 			{
 
-				// Elevators Status
+				//Every  Elevator Status
 				for (int j = 0; j < elevator.Length; j++)
 				{
 					Console.Out.WriteLine("\nElevator " + (j + 1) + " is at Floor----> " + elevator[j].getCurrentFloor()
@@ -38,7 +42,8 @@ class Program
 
 				Console.Out.WriteLine("\nHow many floors are being called ");
 
-				int numFloors = Int32.Parse(Console.ReadLine()); // Checking if the user wants Multiple floors call
+				// Checking if the user wants Multiple floors call
+				int numFloors = Int32.Parse(Console.ReadLine()); 
 				int[] floor = new int[numFloors];
 				int[] people = new int[numFloors];
 
@@ -47,7 +52,7 @@ class Program
 				for (int i = 0; i < numFloors; i++) 
 				{
 
-					// Selecting the floor where people are waiting
+					//User selection of desired floor where people are waiting
 					while (true)
 					{
 						Console.Out.WriteLine("Please enter the NEXT FLOOR NUMBER where people are waiting..("
@@ -66,7 +71,7 @@ class Program
 
 					}
 
-					// Choosing the BEST ELEVATOR for that location
+					// Optimizing the BEST ELEVATOR for that location selected by the user
 					int[] unsorted = new int[elevator.Length];
 					int[] sorted = new int[elevator.Length];
 			
@@ -80,13 +85,13 @@ class Program
 
 					for (int j = 0; j < sorted.Length; j++)
 					{
-							for (int k = 0; k < elevator.Length; k++)
+							for (int k = 0; k < unsorted.Length; k++)
 							{
 
 								{
 									if (elevator[k].getIsIdle() == 0 && sorted[j] == unsorted[k])
 									{
-										change = elevator[k];
+										change = elevator[k];									//Selecting the desired elevator into temp 
 										z = k + 1;
 										elevator[k].setIsIdle(1);
 										Console.WriteLine("\nElevator " + z + " is selected\n");
@@ -97,8 +102,8 @@ class Program
 							}
 					}
 					LoopEnd:
-					//sfs
-					// Acknowledging the number of people waiting for the elevator on selected floor
+					
+					// Registering the User input of amount of users waiting for on desired floor
 					while (true)
 					{
 						Console.Out.WriteLine("Enter the NUMBER OF PEOPLE waiting at level " + floor[i] + "----->MAXIMUM "
@@ -126,13 +131,16 @@ class Program
 
 					}
 
-					change.moveNext(floor[i], z); // Moving to the selected floor
-					change.setPeople(people[i], z); // Defining the number of people present on the elevator
+					// Moving to the selected floor Step by Step
+					change.moveNext(floor[i], z);
 
-					// checking if the elevator still has people on it
-					while (change.getSum() != 0)
+					// Setting the number of people on the elevator and the elevator selected
+					change.setPeople(people[i], z); 
+
+					//Keeps looping until the people on the elevator is 0
+					while (change.getSum() != 0)                    
 					{
-						// selecting the floor to Unload
+						// selecting the floor where people want to get down
 						while (true)
 						{
 							Console.Out.WriteLine("Please enter your DESTINATION FLOOR(" + elevator[1].getMinFloor() + " to "
@@ -150,7 +158,7 @@ class Program
 							}
 						}
 
-						// Unloading the elevator
+						// Registering the number of people getting down at that floor
 						while (true)
 						{
 							Console.Out.WriteLine("Enter the NUMBER OF PEOPLE getting down at " + floor[i]);
