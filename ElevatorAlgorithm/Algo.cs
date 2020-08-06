@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 
 namespace ElevatorAlgorithm
 {
@@ -7,10 +10,42 @@ namespace ElevatorAlgorithm
         Elevator[] elevator;
         Elevator change;
 
-        public Algo(Elevator[] elevators)
+        public Algo()
         {
-            this.elevator = elevators;
-        }
+
+			//Assigning all default values like minFloor,maxFloor,maxCapacity and number of elevators from a text file Variables.txt
+
+			List<int> termsList = new List<int>();
+
+			String filepath = @"../../../Variables.txt";
+			List<string> lines = File.ReadAllLines(filepath).ToList();
+
+			foreach (var line in lines)
+			{
+
+				string[] entries = line.Split('=');
+
+				termsList.Add(Int32.Parse(entries[1]));
+
+			}
+
+			//termsList[0] = number of elevators;
+			//termsList[1] = lowest floor;
+			//termsList[2] = highest floor;
+			//termsList[3] = maximun number of people an elevator can carry;
+
+			this.elevator = new Elevator[termsList[0]];
+
+			//Assigning Lowest Floor
+			//Highest Floor
+			//Maximun Capacity 
+			//to all the elevators present
+			for (int i = 0; i < termsList[0]; i++)
+			{
+				this.elevator[i] = new Elevator(termsList[1], termsList[2], termsList[3]);
+
+			}
+		}
 
         public void elevatorStatus()
         {
@@ -23,12 +58,12 @@ namespace ElevatorAlgorithm
                 Console.ForegroundColor = ConsoleColor.White;
             }
 
-            Console.Out.WriteLine("--------------------------++++++++-------------------------");
+            Console.Out.WriteLine("--------------------------++++++++--------------------------");
         }
 
         public void Run()
         {
-			// Checking if the user wants Multiple floors call
+			// Checking if the user is calling for Multiple floors
 			Console.Out.WriteLine("\nHOW many MULTIPLE FLOORS are people waiting on?");
 
 			int numFloors = Int32.Parse(Console.ReadLine());
@@ -40,17 +75,17 @@ namespace ElevatorAlgorithm
 			for (int i = 0; i < numFloors; i++)
 			{
 
-				//User selection of desired floor where people are waiting
+				//Selecting floor where people are waiting
 				while (true)
 				{
 					Console.Out.WriteLine("Please enter the NEXT FLOOR NUMBER where people are waiting..("
 							+ elevator[1].getMinFloor() + " to " + elevator[1].getMaxFloor() + ")");
 
-					floor[i] = Int32.Parse(Console.ReadLine());
+					floor[i] = Int32.Parse(Console.ReadLine()); //user Inputting the floor
 
 					if (floor[i] < elevator[1].getMinFloor() || floor[i] > elevator[1].getMaxFloor())
 					{
-						//Color Coding for Error Message
+						//Color Coding for Error Messages
 						Console.ForegroundColor = ConsoleColor.DarkRed;                     
 						Console.Out.WriteLine("FLOOR NUMBER INVALID");
 						Console.ForegroundColor = ConsoleColor.White;
@@ -62,7 +97,7 @@ namespace ElevatorAlgorithm
 
 				}
 
-				// Optimizing the BEST ELEVATOR for that location selected by the user
+				// Optimizing the BEST ELEVATOR for the location selected by the USER
 				int[] unsorted = new int[elevator.Length];
 				int[] sorted = new int[elevator.Length];
 
@@ -82,7 +117,8 @@ namespace ElevatorAlgorithm
 						{
 							if (elevator[k].getIsIdle() == 0 && sorted[j] == unsorted[k])
 							{
-								change = elevator[k];                                   //Selecting the desired elevator into temp 
+								//Selecting the desired elevator into temp
+								change = elevator[k];                                    
 								z = k + 1;
 								elevator[k].setIsIdle(1);
 								Console.ForegroundColor = ConsoleColor.Cyan;
@@ -96,13 +132,13 @@ namespace ElevatorAlgorithm
 				}
 			LoopEnd:
 
-				// Registering the User input of amount of users waiting on that desired floor
+				// Registering the amount of users waiting on selected floor
 				while (true)
 				{
 					Console.Out.WriteLine("Enter the NUMBER OF PEOPLE waiting at level " + floor[i] + "----->MAXIMUM "
 							+ change.getMaxCapacity());
 
-					people[i] = Int32.Parse(Console.ReadLine());
+					people[i] = Int32.Parse(Console.ReadLine());  
 
 					change.setSum(people[i]);
 					if (change.getSum() > 0 && change.getSum() <= (change.getMaxCapacity()))
