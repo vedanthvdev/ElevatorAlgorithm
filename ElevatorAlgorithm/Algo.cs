@@ -7,8 +7,8 @@ namespace ElevatorAlgorithm
 {
     class Algo
     {
-        Elevator[] elevator;
-        Elevator change;
+        ElevatorInterface[] elevator;
+        ElevatorInterface change;
 
         public Algo()
         {
